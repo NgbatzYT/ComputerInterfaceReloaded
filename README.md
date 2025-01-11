@@ -11,8 +11,6 @@
 ## Contributors
 Ngbatz (I'm the one who did everything)
 
-DecalFree (fixed room logic)
-
 Ciperuoy (Helped me get CI assets)
 
 RainWave (Tested)
