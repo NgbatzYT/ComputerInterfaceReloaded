@@ -111,14 +111,47 @@ namespace ComputerInterfaceReloaded.Resources
                 }
                 else
                 {
-                    if (gameObject.name.Length == 1)
+                    if (Plugin.states == Plugin.States.Room)
                     {
-                        char characterToAppend = char.ToUpper(gameObject.name[0]);
-                        Plugin.instance.Type += characterToAppend;
+                        if (Plugin.instance.Type.Length != 12)
+                        {
+                            if (gameObject.name.Length == 1)
+                            {
+                                char characterToAppend = char.ToUpper(gameObject.name[0]);
+                                Plugin.instance.Type += characterToAppend;
+                            }
+                            else if (gameObject.name == "space")
+                            {
+                                Plugin.instance.Type += ' ';
+                            }
+                        }
                     }
-                    else if (gameObject.name == "space")
+                    else if(Plugin.states == Plugin.States.Name)
                     {
-                        Plugin.instance.Type += ' ';
+                        if (Plugin.instance.Type.Length != 12)
+                        {
+                            if (gameObject.name.Length == 1)
+                            {
+                                char characterToAppend = char.ToUpper(gameObject.name[0]);
+                                Plugin.instance.Type += characterToAppend;
+                            }
+                            else if (gameObject.name == "space")
+                            {
+                                Plugin.instance.Type += ' ';
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (gameObject.name.Length == 1)
+                        {
+                            char characterToAppend = char.ToUpper(gameObject.name[0]);
+                            Plugin.instance.Type += characterToAppend;
+                        }
+                        else if (gameObject.name == "space")
+                        {
+                            Plugin.instance.Type += ' ';
+                        }
                     }
                 }
             }

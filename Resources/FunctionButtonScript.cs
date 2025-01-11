@@ -24,7 +24,7 @@ namespace ComputerInterfaceReloaded.Resources
             gameObject.GetComponent<BoxCollider>().isTrigger = true;
             gameObject.layer = 18;
             gameObject.GetComponent<MeshRenderer>().material = releasemat;
-            releasemat.color = new Color(111f / 255f, 207f / 255f, 243f / 255f);
+            releasemat.color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
         }
 
         public void OnTriggerEnter(Collider other)

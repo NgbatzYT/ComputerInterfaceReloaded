@@ -10,9 +10,9 @@ namespace ComputerInterfaceReloaded.Resources
         public Material pressmat;
         public Material releasemat;
         public AudioSource audioSource;
-        public TextMeshPro iforget = GameObject.Find("CI(Clone)/Monitor/CurrentTab").GetComponent<TextMeshPro>();
-        public TextMeshPro fadeddown = GameObject.Find("CI(Clone)/Monitor/FadedDown").GetComponent<TextMeshPro>();
-        public TextMeshPro dedeup = GameObject.Find("CI(Clone)/Monitor/FadedUp").GetComponent<TextMeshPro>();
+        public TextMeshPro iforget = GameObject.Find("CI(Clone)/Ci/Themes/New_Theme/CurrentTab").GetComponent<TextMeshPro>();
+        public TextMeshPro fadeddown = GameObject.Find("CI(Clone)/Ci/Themes/New_Theme/FadedDown").GetComponent<TextMeshPro>();
+        public TextMeshPro dedeup = GameObject.Find("CI(Clone)/Ci/Themes/New_Theme/FadedUp").GetComponent<TextMeshPro>();
 
         public void Start()
         {
@@ -24,7 +24,7 @@ namespace ComputerInterfaceReloaded.Resources
             gameObject.GetComponent<BoxCollider>().isTrigger = true;
             gameObject.layer = 18;
             gameObject.GetComponent<MeshRenderer>().material = releasemat;
-            releasemat.color = new Color(111f / 255f, 207f / 255f, 243f / 255f);
+            releasemat.color = new Color(171f / 255f, 219f / 255f, 171f / 255f);
             UpdateText();
         }
 

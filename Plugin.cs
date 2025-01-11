@@ -93,12 +93,12 @@ namespace ComputerInterfaceReloaded
             bundle = LoadAssetBundle("ComputerInterfaceReloaded.Resources." + assetBundleName);
             assetBundleParent = Instantiate(bundle.LoadAsset<GameObject>(parentName));
             assetBundleParent.transform.position = new Vector3(-67.2225f, 11.53f, -82.611f);
-            GameObject foundObject = GameObject.Find("CI(Clone)/Monitor/TextInput");
+            GameObject foundObject = GameObject.Find("CI(Clone)/Ci/Themes/New_Theme/TextInput");
             Input = foundObject.GetComponent<TextMeshPro>();
         }
         public void Init()
         {
-            GameObject but = GameObject.Find("CI(Clone)/KeyboardStuff");
+            GameObject but = GameObject.Find("CI(Clone)/keyboardstuff");
             List<GameObject> buttons = new List<GameObject>();
 
             foreach (Transform child in but.transform)
@@ -113,7 +113,7 @@ namespace ComputerInterfaceReloaded
             GameObject left = GameObject.Find("CI(Clone)/KeyboardStuff/left");
             GameObject right = GameObject.Find("CI(Clone)/KeyboardStuff/right");
             GameObject spac = GameObject.Find("CI(Clone)/KeyboardStuff/space");
-            GameObject backsp = GameObject.Find("CI(Clone)/KeyboardStuff/Backspace");
+            GameObject backsp = GameObject.Find("CI(Clone)/KeyboardStuff/backspace");
             GameObject entt = GameObject.Find("CI(Clone)/KeyboardStuff/enter");
             GameObject option1 = GameObject.Find("CI(Clone)/KeyboardStuff/option1");
             GameObject option2 = GameObject.Find("CI(Clone)/KeyboardStuff/option2");
@@ -183,7 +183,7 @@ namespace ComputerInterfaceReloaded
 
         public void Update()
         {
-            GameObject GorillaPC = GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom/TreeRoomInteractables/GorillaComputerObject");
+            GameObject GorillaPC = GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom/TreeRoomInteractables/GorillaComputerObject/Keyboard (1)");
             GameObject Text = GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom");
             if (GorillaPC.activeSelf)
                 GorillaPC.SetActive(false);
