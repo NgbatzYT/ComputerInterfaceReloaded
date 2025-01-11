@@ -1,0 +1,14 @@
+GPLv3 License for ci assets
+
+Certain assets in this project are licensed under the GNU General Public License version 3 (GPLv3). You can find a copy of the license at <https://www.gnu.org/licenses/gpl-3.0.html>.
+
+Copyright (c) Toni Macaroni
+
+You are free to use, modify, and distribute these assets under the terms of the GPLv3 license, provided that you:
+1. Include a copy of the GPLv3 license with any distribution.
+2. Provide attribution to Toni Macaroni as specified in the documentation.
+
+List of GPLv3-Licensed Assets:
+- ci (Resources/ci)
+
+For additional questions, refer to the original license.
