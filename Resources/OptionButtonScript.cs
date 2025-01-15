@@ -1,8 +1,4 @@
-﻿using GorillaNetworking;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace ComputerInterfaceReloaded.Resources
 {
@@ -48,7 +44,7 @@ namespace ComputerInterfaceReloaded.Resources
                         PlayerPrefs.SetString("currentQueue", Plugin.Gpc.currentQueue);
                         PlayerPrefs.Save();
                     }
-                    else if (Plugin.states == Plugin.States.Color) { Plugin.col = 1; }
+                    else if (Plugin.states == Plugin.States.Color) { ScreenHandler.col = 1; }
                 }
                 else if (gameObject.name.Contains("2"))
                 {
@@ -66,7 +62,7 @@ namespace ComputerInterfaceReloaded.Resources
                     }
                     else if (Plugin.states == Plugin.States.Color)
                     {
-                        Plugin.col = 3;
+                        ScreenHandler.col = 3;
                     }
                 }
                 else if (gameObject.name.Contains("3"))
@@ -88,7 +84,7 @@ namespace ComputerInterfaceReloaded.Resources
                     }
                     else if (Plugin.states == Plugin.States.Color)
                     {
-                        Plugin.col = 3;
+                        ScreenHandler.col = 3;
                     }
                 }
             }

@@ -1,5 +1,4 @@
 ﻿using Photon.Pun;
-using System;
 using UnityEngine;
 
 namespace ComputerInterfaceReloaded.Resources
@@ -9,6 +8,7 @@ namespace ComputerInterfaceReloaded.Resources
         public Material pressmat;
         public Material releasemat;
         public AudioSource audioSource;
+        public ScreenHandler screenHandler = GameObject.Find("CI(Clone)/help").GetComponent<ScreenHandler>();
 
         public void Start()
         {
@@ -37,64 +37,64 @@ namespace ComputerInterfaceReloaded.Resources
                         switch (numberKey)
                         {
                             case 1:
-                                if (Plugin.col == 1) { Plugin.r = 1f; }
-                                if (Plugin.col == 2) { Plugin.g = 1f; }
-                                if (Plugin.col == 3) { Plugin.b = 1f; }
+                                if (ScreenHandler.col == 1) { ScreenHandler.r = 1f; }
+                                if (ScreenHandler.col == 2) { ScreenHandler.g = 1f; }
+                                if (ScreenHandler.col == 3) { ScreenHandler.b = 1f; }
                                 break;
                             case 2:
-                                if (Plugin.col == 1) { Plugin.r = 2f; }
-                                if (Plugin.col == 2) { Plugin.g = 2f; }
-                                if (Plugin.col == 3) { Plugin.b = 2f; }
+                                if (ScreenHandler.col == 1) { ScreenHandler.r = 2f; }
+                                if (ScreenHandler.col == 2) { ScreenHandler.g = 2f; }
+                                if (ScreenHandler.col == 3) { ScreenHandler.b = 2f; }
                                 break;
                             case 3:
-                                if (Plugin.col == 1) { Plugin.r = 3f; }
-                                if (Plugin.col == 2) { Plugin.g = 3f; }
-                                if (Plugin.col == 3) { Plugin.b = 3f; }
+                                if (ScreenHandler.col == 1) { ScreenHandler.r = 3f; }
+                                if (ScreenHandler.col == 2) { ScreenHandler.g = 3f; }
+                                if (ScreenHandler.col == 3) { ScreenHandler.b = 3f; }
                                 break;
                             case 4:
-                                if (Plugin.col == 1) { Plugin.r = 4f; }
-                                if (Plugin.col == 2) { Plugin.g = 4f; }
-                                if (Plugin.col == 3) { Plugin.b = 4f; }
+                                if (ScreenHandler.col == 1) { ScreenHandler.r = 4f; }
+                                if (ScreenHandler.col == 2) { ScreenHandler.g = 4f; }
+                                if (ScreenHandler.col == 3) { ScreenHandler.b = 4f; }
                                 break;
                             case 5:
-                                if (Plugin.col == 1) { Plugin.r = 5f; }
-                                if (Plugin.col == 2) { Plugin.g = 5f; }
-                                if (Plugin.col == 3) { Plugin.b = 5f; }
+                                if (ScreenHandler.col == 1) { ScreenHandler.r = 5f; }
+                                if (ScreenHandler.col == 2) { ScreenHandler.g = 5f; }
+                                if (ScreenHandler.col == 3) { ScreenHandler.b = 5f; }
                                 break;
                             case 6:
-                                if (Plugin.col == 1) { Plugin.r = 6f; }
-                                if (Plugin.col == 2) { Plugin.g = 6f; }
-                                if (Plugin.col == 3) { Plugin.b = 6f; }
+                                if (ScreenHandler.col == 1) { ScreenHandler.r = 6f; }
+                                if (ScreenHandler.col == 2) { ScreenHandler.g = 6f; }
+                                if (ScreenHandler.col == 3) { ScreenHandler.b = 6f; }
                                 break;
                             case 7:
-                                if (Plugin.col == 1) { Plugin.r = 7f; }
-                                if (Plugin.col == 2) { Plugin.g = 7f; }
-                                if (Plugin.col == 3) { Plugin.b = 7f; }
+                                if (ScreenHandler.col == 1) { ScreenHandler.r = 7f; }
+                                if (ScreenHandler.col == 2) { ScreenHandler.g = 7f; }
+                                if (ScreenHandler.col == 3) { ScreenHandler.b = 7f; }
                                 break;
                             case 8:
-                                if (Plugin.col == 1) { Plugin.r = 8f; }
-                                if (Plugin.col == 2) { Plugin.g = 8f; }
-                                if (Plugin.col == 3) { Plugin.b = 8f; }
+                                if (ScreenHandler.col == 1) { ScreenHandler.r = 8f; }
+                                if (ScreenHandler.col == 2) { ScreenHandler.g = 8f; }
+                                if (ScreenHandler.col == 3) { ScreenHandler.b = 8f; }
                                 break;
                             case 9:
-                                if (Plugin.col == 1) { Plugin.r = 9f; }
-                                if (Plugin.col == 2) { Plugin.g = 9f; }
-                                if (Plugin.col == 3) { Plugin.b = 9f; }
+                                if (ScreenHandler.col == 1) { ScreenHandler.r = 9f; }
+                                if (ScreenHandler.col == 2) { ScreenHandler.g = 9f; }
+                                if (ScreenHandler.col == 3) { ScreenHandler.b = 9f; }
                                 break;
                             case 0:
-                                if (Plugin.col == 1) { Plugin.r = 0f; }
-                                if (Plugin.col == 2) { Plugin.g = 0f; }
-                                if (Plugin.col == 3) { Plugin.b = 0f; }
+                                if (ScreenHandler.col == 1) { ScreenHandler.r = 0f; }
+                                if (ScreenHandler.col == 2) { ScreenHandler.g = 0f; }
+                                if (ScreenHandler.col == 3) { ScreenHandler.b = 0f; }
                                 break;
                         }
                     }
-                    float redValue = Plugin.r;
+                    float redValue = ScreenHandler.r;
                     PlayerPrefs.SetFloat("redValue", redValue);
 
-                    float greenValue = Plugin.g;
+                    float greenValue = ScreenHandler.g;
                     PlayerPrefs.SetFloat("greenValue", greenValue);
 
-                    float blueValue = Plugin.b;
+                    float blueValue = ScreenHandler.b;
                     PlayerPrefs.SetFloat("blueValue", blueValue);
 
                     GorillaTagger.Instance.UpdateColor(redValue, greenValue, blueValue);
@@ -113,31 +113,31 @@ namespace ComputerInterfaceReloaded.Resources
                 {
                     if (Plugin.states == Plugin.States.Room)
                     {
-                        if (Plugin.instance.Type.Length != 12)
+                        if (screenHandler.Type.Length != 12)
                         {
                             if (gameObject.name.Length == 1)
                             {
                                 char characterToAppend = char.ToUpper(gameObject.name[0]);
-                                Plugin.instance.Type += characterToAppend;
+                                screenHandler.Type += characterToAppend;
                             }
                             else if (gameObject.name == "space")
                             {
-                                Plugin.instance.Type += ' ';
+                                screenHandler.Type += ' ';
                             }
                         }
                     }
                     else if(Plugin.states == Plugin.States.Name)
                     {
-                        if (Plugin.instance.Type.Length != 12)
+                        if (screenHandler.Type.Length != 12)
                         {
                             if (gameObject.name.Length == 1)
                             {
                                 char characterToAppend = char.ToUpper(gameObject.name[0]);
-                                Plugin.instance.Type += characterToAppend;
+                                screenHandler.Type += characterToAppend;
                             }
                             else if (gameObject.name == "space")
                             {
-                                Plugin.instance.Type += ' ';
+                                screenHandler.Type += ' ';
                             }
                         }
                     }
@@ -146,11 +146,11 @@ namespace ComputerInterfaceReloaded.Resources
                         if (gameObject.name.Length == 1)
                         {
                             char characterToAppend = char.ToUpper(gameObject.name[0]);
-                            Plugin.instance.Type += characterToAppend;
+                            screenHandler.Type += characterToAppend;
                         }
                         else if (gameObject.name == "space")
                         {
-                            Plugin.instance.Type += ' ';
+                            screenHandler.Type += ' ';
                         }
                     }
                 }

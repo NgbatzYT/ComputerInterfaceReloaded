@@ -2,9 +2,6 @@
 using GorillaTagScripts;
 using Photon.Pun;
 using UnityEngine;
-using ComputerInterfaceReloaded.Resources;
-using System;
-using Photon.Realtime;
 
 namespace ComputerInterfaceReloaded.Resources
 {
@@ -13,6 +10,7 @@ namespace ComputerInterfaceReloaded.Resources
         public Material pressmat;
         public Material releasemat;
         public AudioSource audioSource;
+        public ScreenHandler screenHandler = GameObject.Find("CI(clone)/help").GetComponent<ScreenHandler>();
 
         public void Start()
         {
@@ -25,6 +23,8 @@ namespace ComputerInterfaceReloaded.Resources
             gameObject.layer = 18;
             gameObject.GetComponent<MeshRenderer>().material = releasemat;
             releasemat.color = new Color(77f / 255f, 77f / 255f, 77f / 255f);
+            Material special = new Material(Shader.Find("Universal Render Pipeline/Lit"));
+            special.color = new Color(111f / 255f, 207f / 255f, 243f / 255f);
         }
 
         public void OnTriggerEnter(Collider other)
@@ -32,26 +32,28 @@ namespace ComputerInterfaceReloaded.Resources
             GorillaTriggerColliderHandIndicator component = other.GetComponent<GorillaTriggerColliderHandIndicator>();
             if (component != null)
             {
+                gameObject.GetComponent<MeshRenderer>().material = pressmat;
+                GorillaTagger.Instance.offlineVRRig.PlayHandTapLocal(67, component.isLeftHand, 0.05f);
+                GorillaTagger.Instance.StartVibration(component.isLeftHand, GorillaTagger.Instance.tapHapticStrength / 2f, GorillaTagger.Instance.tapHapticDuration);
+                
                 if (gameObject.name.Contains("enter"))
                 {
-                    gameObject.GetComponent<MeshRenderer>().material = pressmat;
-                    GorillaTagger.Instance.offlineVRRig.PlayHandTapLocal(67, component.isLeftHand, 0.05f);
-                    GorillaTagger.Instance.StartVibration(component.isLeftHand, GorillaTagger.Instance.tapHapticStrength / 2f, GorillaTagger.Instance.tapHapticDuration);
+                    
 
                     if (Plugin.states == Plugin.States.Name)
                     {
-                        if (!string.IsNullOrEmpty(Plugin.instance.Type))
+                        if (!string.IsNullOrEmpty(screenHandler.Type))
                         {
-                            if (GorillaComputer.instance.CheckAutoBanListForName(Plugin.instance.Type))
+                            if (GorillaComputer.instance.CheckAutoBanListForName(screenHandler.Type))
                             {
-                                if (Plugin.instance.Type.Length < 10)
+                                if (screenHandler.Type.Length < 10)
                                 {
-                                    Plugin.instance.Type = Plugin.instance.Type.Replace(" ", "");
-                                    GorillaComputer.instance.currentName = Plugin.instance.Type;
-                                    PhotonNetwork.LocalPlayer.NickName = Plugin.instance.Type;
-                                    GorillaComputer.instance.offlineVRRigNametagText.text = Plugin.instance.Type;
-                                    GorillaComputer.instance.savedName = Plugin.instance.Type;
-                                    PlayerPrefs.SetString("playerName", Plugin.instance.Type);
+                                    screenHandler.Type = screenHandler.Type.Replace(" ", "");
+                                    GorillaComputer.instance.currentName = screenHandler.Type;
+                                    PhotonNetwork.LocalPlayer.NickName = screenHandler.Type;
+                                    GorillaComputer.instance.offlineVRRigNametagText.text = screenHandler.Type;
+                                    GorillaComputer.instance.savedName = screenHandler.Type;
+                                    PlayerPrefs.SetString("playerName", screenHandler.Type);
                                     PlayerPrefs.Save();
                                 }
                             }
@@ -59,28 +61,34 @@ namespace ComputerInterfaceReloaded.Resources
                     }
                     else if (Plugin.states == Plugin.States.Room)
                     {
-                        if (!string.IsNullOrEmpty(Plugin.instance.Type))
+                        if (!string.IsNullOrEmpty(screenHandler.Type))
                         {
-                            if (GorillaComputer.instance.CheckAutoBanListForName(Plugin.instance.Type))
+                            if (GorillaComputer.instance.CheckAutoBanListForName(screenHandler.Type))
                             {
-                                if (Plugin.instance.Type.Length < 10)
+                                if (screenHandler.Type.Length < 10)
                                 {
-                                    Plugin.instance.Type = Plugin.instance.Type.Replace(" ", "");
-                                    PhotonNetworkController.Instance.AttemptToJoinSpecificRoom(Plugin.instance.Type, JoinType.Solo);
+                                    screenHandler.Type = screenHandler.Type.Replace(" ", "");
+                                    PhotonNetworkController.Instance.AttemptToJoinSpecificRoom(screenHandler.Type, JoinType.Solo);
                                 }
                             }
                         }
                     }
-                    else if (Plugin.states == Plugin.States.Support) { Plugin.showerhead = true; }
+                    else if (Plugin.states == Plugin.States.Support) { ScreenHandler.showerhead = true; }
+                    else if (Plugin.states == Plugin.States.Addons) { screenHandler.addonpag = true; }
                 }
-                else if (gameObject.name.Contains("Backspace"))
+                else if (gameObject.name.Contains("backspace"))
                 {
-                    gameObject.GetComponent<MeshRenderer>().material = pressmat;
-                    GorillaTagger.Instance.offlineVRRig.PlayHandTapLocal(67, component.isLeftHand, 0.05f);
-                    GorillaTagger.Instance.StartVibration(component.isLeftHand, GorillaTagger.Instance.tapHapticStrength / 2f, GorillaTagger.Instance.tapHapticDuration);
-                    if (!string.IsNullOrEmpty(Plugin.instance.Type))
+                    
+                    if (!string.IsNullOrEmpty(screenHandler.Type))
                     {
-                        Plugin.instance.Type = Plugin.instance.Type.Substring(0, Plugin.instance.Type.Length - 1);
+                        screenHandler.Type = screenHandler.Type.Substring(0, screenHandler.Type.Length - 1);
+                    }
+                }
+                else if(gameObject.name.Equals("back"))
+                {
+                    if(screenHandler.addonpag)
+                    {
+                        screenHandler.addonpag = false;
                     }
                 }
             }

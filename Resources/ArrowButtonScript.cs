@@ -1,5 +1,4 @@
-﻿using PlayFab.ClientModels;
-using System;
+﻿using System;
 using UnityEngine;
 using TMPro;
 
@@ -10,9 +9,10 @@ namespace ComputerInterfaceReloaded.Resources
         public Material pressmat;
         public Material releasemat;
         public AudioSource audioSource;
-        public TextMeshPro iforget = GameObject.Find("CI(Clone)/Ci/Themes/New_Theme/CurrentTab").GetComponent<TextMeshPro>();
-        public TextMeshPro fadeddown = GameObject.Find("CI(Clone)/Ci/Themes/New_Theme/FadedDown").GetComponent<TextMeshPro>();
-        public TextMeshPro dedeup = GameObject.Find("CI(Clone)/Ci/Themes/New_Theme/FadedUp").GetComponent<TextMeshPro>();
+        public TextMeshProUGUI iforget = GameObject.Find("CI(Clone)/NT/CurrentTab").GetComponent<TextMeshProUGUI>();
+        public TextMeshProUGUI fadeddown = GameObject.Find("CI(Clone)/NT/FadedDown").GetComponent<TextMeshProUGUI>();
+        public TextMeshProUGUI dedeup = GameObject.Find("CI(Clone)/NT/FadedUp").GetComponent<TextMeshProUGUI>();
+        public ScreenHandler screenHandler = GameObject.Find("CI(clone)/help").GetComponent<ScreenHandler>();
 
         public void Start()
         {
@@ -39,8 +39,8 @@ namespace ComputerInterfaceReloaded.Resources
                     Plugin.states = GetNextState();
                     GorillaTagger.Instance.offlineVRRig.PlayHandTapLocal(67, component.isLeftHand, 0.05f);
                     GorillaTagger.Instance.StartVibration(component.isLeftHand, GorillaTagger.Instance.tapHapticStrength / 2f, GorillaTagger.Instance.tapHapticDuration);
-                    Plugin.instance.Type = "";
-                    Plugin.showerhead = false;
+                    screenHandler.Type = "";
+                    ScreenHandler.showerhead = false;
                     UpdateText();
                 }
                 else if (gameObject.name == "down")
@@ -49,8 +49,8 @@ namespace ComputerInterfaceReloaded.Resources
                     Plugin.states = GetPreviousState();
                     GorillaTagger.Instance.offlineVRRig.PlayHandTapLocal(67, component.isLeftHand, 0.05f);
                     GorillaTagger.Instance.StartVibration(component.isLeftHand, GorillaTagger.Instance.tapHapticStrength / 2f, GorillaTagger.Instance.tapHapticDuration);
-                    Plugin.instance.Type = "";
-                    Plugin.showerhead = false;
+                    screenHandler.Type = "";
+                    ScreenHandler.showerhead = false;
                     UpdateText();
                 }
                 
