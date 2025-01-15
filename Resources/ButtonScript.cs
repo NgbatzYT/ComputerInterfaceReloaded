@@ -113,31 +113,31 @@ namespace ComputerInterfaceReloaded.Resources
                 {
                     if (Plugin.states == Plugin.States.Room)
                     {
-                        if (screenHandler.Type.Length != 12)
+                        if (ScreenHandler.Type.Length != 12)
                         {
                             if (gameObject.name.Length == 1)
                             {
                                 char characterToAppend = char.ToUpper(gameObject.name[0]);
-                                screenHandler.Type += characterToAppend;
+                                ScreenHandler.Type += characterToAppend;
                             }
                             else if (gameObject.name == "space")
                             {
-                                screenHandler.Type += ' ';
+                                ScreenHandler.Type += ' ';
                             }
                         }
                     }
                     else if(Plugin.states == Plugin.States.Name)
                     {
-                        if (screenHandler.Type.Length != 12)
+                        if (ScreenHandler.Type.Length != 12)
                         {
                             if (gameObject.name.Length == 1)
                             {
                                 char characterToAppend = char.ToUpper(gameObject.name[0]);
-                                screenHandler.Type += characterToAppend;
+                                ScreenHandler.Type += characterToAppend;
                             }
                             else if (gameObject.name == "space")
                             {
-                                screenHandler.Type += ' ';
+                                ScreenHandler.Type += ' ';
                             }
                         }
                     }
@@ -146,11 +146,11 @@ namespace ComputerInterfaceReloaded.Resources
                         if (gameObject.name.Length == 1)
                         {
                             char characterToAppend = char.ToUpper(gameObject.name[0]);
-                            screenHandler.Type += characterToAppend;
+                            ScreenHandler.Type += characterToAppend;
                         }
                         else if (gameObject.name == "space")
                         {
-                            screenHandler.Type += ' ';
+                            ScreenHandler.Type += ' ';
                         }
                     }
                 }

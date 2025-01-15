@@ -42,18 +42,18 @@ namespace ComputerInterfaceReloaded.Resources
 
                     if (Plugin.states == Plugin.States.Name)
                     {
-                        if (!string.IsNullOrEmpty(screenHandler.Type))
+                        if (!string.IsNullOrEmpty(ScreenHandler.Type))
                         {
-                            if (GorillaComputer.instance.CheckAutoBanListForName(screenHandler.Type))
+                            if (GorillaComputer.instance.CheckAutoBanListForName(ScreenHandler.Type))
                             {
-                                if (screenHandler.Type.Length < 10)
+                                if (ScreenHandler.Type.Length < 10)
                                 {
-                                    screenHandler.Type = screenHandler.Type.Replace(" ", "");
-                                    GorillaComputer.instance.currentName = screenHandler.Type;
-                                    PhotonNetwork.LocalPlayer.NickName = screenHandler.Type;
-                                    GorillaComputer.instance.offlineVRRigNametagText.text = screenHandler.Type;
-                                    GorillaComputer.instance.savedName = screenHandler.Type;
-                                    PlayerPrefs.SetString("playerName", screenHandler.Type);
+                                    ScreenHandler.Type = ScreenHandler.Type.Replace(" ", "");
+                                    GorillaComputer.instance.currentName = ScreenHandler.Type;
+                                    PhotonNetwork.LocalPlayer.NickName = ScreenHandler.Type;
+                                    GorillaComputer.instance.offlineVRRigNametagText.text = ScreenHandler.Type;
+                                    GorillaComputer.instance.savedName = ScreenHandler.Type;
+                                    PlayerPrefs.SetString("playerName", ScreenHandler.Type);
                                     PlayerPrefs.Save();
                                 }
                             }
@@ -61,14 +61,14 @@ namespace ComputerInterfaceReloaded.Resources
                     }
                     else if (Plugin.states == Plugin.States.Room)
                     {
-                        if (!string.IsNullOrEmpty(screenHandler.Type))
+                        if (!string.IsNullOrEmpty(ScreenHandler.Type))
                         {
-                            if (GorillaComputer.instance.CheckAutoBanListForName(screenHandler.Type))
+                            if (GorillaComputer.instance.CheckAutoBanListForName(ScreenHandler.Type))
                             {
-                                if (screenHandler.Type.Length < 10)
+                                if (ScreenHandler.Type.Length != 12)
                                 {
-                                    screenHandler.Type = screenHandler.Type.Replace(" ", "");
-                                    PhotonNetworkController.Instance.AttemptToJoinSpecificRoom(screenHandler.Type, JoinType.Solo);
+                                    ScreenHandler.Type = ScreenHandler.Type.Replace(" ", "");
+                                    PhotonNetworkController.Instance.AttemptToJoinSpecificRoom(ScreenHandler.Type, JoinType.Solo);
                                 }
                             }
                         }
@@ -79,9 +79,9 @@ namespace ComputerInterfaceReloaded.Resources
                 else if (gameObject.name.Contains("backspace"))
                 {
                     
-                    if (!string.IsNullOrEmpty(screenHandler.Type))
+                    if (!string.IsNullOrEmpty(ScreenHandler.Type))
                     {
-                        screenHandler.Type = screenHandler.Type.Substring(0, screenHandler.Type.Length - 1);
+                        ScreenHandler.Type = ScreenHandler.Type.Substring(0, ScreenHandler.Type.Length - 1);
                     }
                 }
                 else if(gameObject.name.Equals("back"))

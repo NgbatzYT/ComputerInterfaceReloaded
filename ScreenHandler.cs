@@ -27,7 +27,7 @@ namespace ComputerInterfaceReloaded
         public string Cname = PlayerPrefs.GetString("playerName", "gorilla");
         public string RoomState = "";
         public string PlayerLobb = "NOT IN ROOM";
-        public string Type = "";
+        public static string Type = "";
         public string EGG = "Players online";
         public bool InRoom;
         public static bool showerhead = false;
@@ -41,9 +41,56 @@ namespace ComputerInterfaceReloaded
         public void Start()
         {
             pttType = PlayerPrefs.GetString("pttType", "ALL CHAT");
+
+            Gpc.currentQueue = PlayerPrefs.GetString("currentQueue", "DEFAULT");
+            Gpc.allowedInCompetitive = (PlayerPrefs.GetInt("allowedInCompetitive", 0) == 1);
+            if (!Gpc.allowedInCompetitive && Gpc.currentQueue == "COMPETITIVE")
+            {
+                PlayerPrefs.SetString("currentQueue", "DEFAULT");
+                PlayerPrefs.Save();
+                Gpc.currentQueue = "DEFAULT";
+            }
         }
         public void Update()
         {
+
+            if (netsys.GameModeString.Contains("MODDED") && !InRoom)
+            {
+                foreach (var addon in Plugin.loadedAddons)
+                {
+                    var instance = Activator.CreateInstance(addon);
+                    addon.GetMethod("OnModdedJoin")?.Invoke(instance, null);
+                }
+                InRoom = true;
+            }
+
+            if (!netsys.GameModeString.Contains("MODDED") && InRoom)
+            {
+                foreach (var addon in Plugin.loadedAddons)
+                {
+                    var instance = Activator.CreateInstance(addon);
+                    addon.GetMethod("OnModdedLeft")?.Invoke(instance, null);
+                }
+                InRoom = false;
+            }
+
+            GameObject Text = GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom");
+
+            TextMeshPro[] textMeshes = Text.GetComponentsInChildren<TextMeshPro>(true);
+
+            var othertmpnames = new HashSet<string>
+            { "delete", "Data", "option3", "option2", "enter", "option1", "downtext", "uptext", "FunctionSelect" };
+
+            foreach (TextMeshPro textMesh in textMeshes)
+            {
+                string objectName = textMesh.gameObject.name;
+                if ((objectName.Length == 1 || othertmpnames.Contains(objectName)) && textMesh.gameObject.activeSelf)
+                    textMesh.gameObject.SetActive(false);
+            }
+
+            GameObject GorillaPC = GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom/TreeRoomInteractables/GorillaComputerObject/ComputerUI/keyboard (1)");
+            if (GorillaPC.activeSelf) { GorillaPC.SetActive(false); }
+
             inited = true;
             if (help == null)
             {

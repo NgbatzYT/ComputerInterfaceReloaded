@@ -174,21 +174,8 @@ namespace ComputerInterfaceReloaded
             {
                 inited = true;
                 initfail = false;
-            }
-
-            Gpc.enabled = false;    
-
-            Gpc.currentQueue = PlayerPrefs.GetString("currentQueue", "DEFAULT");
-            Gpc.allowedInCompetitive = (PlayerPrefs.GetInt("allowedInCompetitive", 0) == 1);
-            if (!Gpc.allowedInCompetitive && Gpc.currentQueue == "COMPETITIVE")
-            {
-                PlayerPrefs.SetString("currentQueue", "DEFAULT");
-                PlayerPrefs.Save();
-                Gpc.currentQueue = "DEFAULT";
-            }
-
-            GameObject GorillaPC = GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom/TreeRoomInteractables/GorillaComputerObject/ComputerUI/keyboard (1)");
-            if (GorillaPC.activeSelf) { GorillaPC.SetActive(false); }
+            }   
+            
             GameObject Text = GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom");
 
             TextMeshPro[] textMeshes = Text.GetComponentsInChildren<TextMeshPro>(true);
@@ -288,26 +275,6 @@ namespace ComputerInterfaceReloaded
             {
                 addonpag = false;
                 help.text = "Error: addon page isnt unlocked till version 1.1.0 sadly... Press back button to leave.";
-            }
-
-            if (netsys.GameModeString.Contains("MODDED") && !InRoom)
-            {
-                foreach (var addon in loadedAddons)
-                {
-                    var instance = Activator.CreateInstance(addon);
-                    addon.GetMethod("OnModdedJoin")?.Invoke(instance, null);
-                }
-                InRoom = true;
-            }
-
-            if (!netsys.GameModeString.Contains("MODDED") && InRoom)
-            {
-                foreach (var addon in loadedAddons)
-                {
-                    var instance = Activator.CreateInstance(addon);
-                    addon.GetMethod("OnModdedLeft")?.Invoke(instance, null);
-                }
-                InRoom = false;
             }
         }*/
     }

@@ -39,7 +39,7 @@ namespace ComputerInterfaceReloaded.Resources
                     Plugin.states = GetNextState();
                     GorillaTagger.Instance.offlineVRRig.PlayHandTapLocal(67, component.isLeftHand, 0.05f);
                     GorillaTagger.Instance.StartVibration(component.isLeftHand, GorillaTagger.Instance.tapHapticStrength / 2f, GorillaTagger.Instance.tapHapticDuration);
-                    screenHandler.Type = "";
+                    ScreenHandler.Type = "";
                     ScreenHandler.showerhead = false;
                     UpdateText();
                 }
@@ -49,7 +49,7 @@ namespace ComputerInterfaceReloaded.Resources
                     Plugin.states = GetPreviousState();
                     GorillaTagger.Instance.offlineVRRig.PlayHandTapLocal(67, component.isLeftHand, 0.05f);
                     GorillaTagger.Instance.StartVibration(component.isLeftHand, GorillaTagger.Instance.tapHapticStrength / 2f, GorillaTagger.Instance.tapHapticDuration);
-                    screenHandler.Type = "";
+                    ScreenHandler.Type = "";
                     ScreenHandler.showerhead = false;
                     UpdateText();
                 }
