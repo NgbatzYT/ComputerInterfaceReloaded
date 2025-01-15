@@ -23,7 +23,7 @@ If you want to create an addon for CI Reloaded, check the addons folder in the s
 
 ---
 
-**Note**: If you need any help with creating an addon dm me on discord (ngbatzyt)
+**Note**: If you need any help with creating an addon join the [discord](https://discord.gg/qnGWsUhBW2 )
 
 ---
 
