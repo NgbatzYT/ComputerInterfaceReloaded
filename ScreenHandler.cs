@@ -18,6 +18,7 @@ namespace ComputerInterfaceReloaded
         public string pttType;
         public static GorillaComputer Gpc = GorillaComputer.instance;
         public NetworkSystem netsys = NetworkSystem.Instance;
+        public static string CurrentTheme;
         public bool addonpag = false;
         public static List<string> AddonNames = new List<string>();
         public static string allAddons;
@@ -35,7 +36,7 @@ namespace ComputerInterfaceReloaded
         public string gs = g.ToString();
         public string bs = b.ToString();
         public static int col = 1;
-        public TextMeshPro help;
+        public TMP_Text help;
 
 
         public void Start()
@@ -54,26 +55,6 @@ namespace ComputerInterfaceReloaded
         public void Update()
         {
 
-            if (netsys.GameModeString.Contains("MODDED") && !InRoom)
-            {
-                foreach (var addon in Plugin.loadedAddons)
-                {
-                    var instance = Activator.CreateInstance(addon);
-                    addon.GetMethod("OnModdedJoin")?.Invoke(instance, null);
-                }
-                InRoom = true;
-            }
-
-            if (!netsys.GameModeString.Contains("MODDED") && InRoom)
-            {
-                foreach (var addon in Plugin.loadedAddons)
-                {
-                    var instance = Activator.CreateInstance(addon);
-                    addon.GetMethod("OnModdedLeft")?.Invoke(instance, null);
-                }
-                InRoom = false;
-            }
-
             GameObject Text = GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom");
 
             TextMeshPro[] textMeshes = Text.GetComponentsInChildren<TextMeshPro>(true);
@@ -89,16 +70,37 @@ namespace ComputerInterfaceReloaded
             }
 
             GameObject GorillaPC = GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom/TreeRoomInteractables/GorillaComputerObject/ComputerUI/keyboard (1)");
-            if (GorillaPC.activeSelf) { GorillaPC.SetActive(false); }
+            GorillaPC.SetActive(false);
 
             inited = true;
+            help = gameObject.GetComponent<TMP_Text>();
             if (help == null)
             {
-                help = gameObject.GetComponent<TextMeshPro>();
+                Plugin.Log.LogError("uwu~");
             }
-            else
+            if(help != null)
             {
                 UpdateScreenNew();
+            }
+
+
+            if (netsys.GameModeString.Contains("MODDED") && !InRoom && netsys.InRoom)
+            {
+                foreach (var addon in Plugin.loadedAddons)
+                {
+                    var instance = Activator.CreateInstance(addon);
+                    addon.GetMethod("OnModdedJoin")?.Invoke(instance, null);
+                }
+                InRoom = true;
+            }
+            else if (!netsys.GameModeString.Contains("MODDED") && InRoom && netsys.InRoom)
+            {
+                foreach (var addon in Plugin.loadedAddons)
+                {
+                    var instance = Activator.CreateInstance(addon);
+                    addon.GetMethod("OnModdedLeft")?.Invoke(instance, null);
+                }
+                InRoom = false;
             }
         }
 
@@ -130,6 +132,8 @@ namespace ComputerInterfaceReloaded
                 help.text = $"PlayerID: {PlayFabAuthenticator.instance.GetPlayFabPlayerId()} \nDO NOT share this with anyone besides Another Axiom support.";
             else if (Plugin.states == Plugin.States.Queue && !initfail && inited && !addonpag)
                 help.text = $"This is where you select your queue. \nUse the option keys to change your queue. There are 3 queues Default, Minigames and Competitive \n \n \nQueue: {Gpc.currentQueue}";
+            else if (Plugin.states == Plugin.States.Addons && !initfail && inited && !addonpag)
+                help.text = $"";
             else if (Plugin.states == Plugin.States.Addons && !initfail && inited && !addonpag)
                 help.text = $"Remember you use addons at your own risk. If you want to be sure there isn't any harmful code in an addon you can use Dnspy to look at the code \n \n \nLoaded addons: {allAddons} \n \nTo go to addon settings press enter.";
             else if (!inited && !initfail)

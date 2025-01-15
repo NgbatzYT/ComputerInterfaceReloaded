@@ -46,7 +46,7 @@ namespace ComputerInterfaceReloaded
             //Turn,
             Support,
             Queue,
-            //Theme,
+            Themes,
             Addons
         }
 
